@@ -7,7 +7,7 @@ php:
   - HHVM
 
 before_script:
-  - composer self-update
-  - composer install --prefer-source --no-interaction --dev
+  - travis_retry composer self-update
+  - travis_retry composer install --prefer-source --no-interaction --dev
 
 script: vendor/bin/phpspec run

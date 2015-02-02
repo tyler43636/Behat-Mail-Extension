@@ -1,0 +1,25 @@
+{
+    "name": "tpayne/behat-mail-extension",
+    "description": "An extension for testing emails with Behat",
+    "require": {
+        "guzzlehttp/guzzle": "~5.1",
+        "behat/behat": "~3.0",
+        "php": ">=5.4"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "~2.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "tPayne\\BehatMailExtension\\": "src/"
+        }
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tyler Payne",
+            "email": "tyler43636@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable"
+}

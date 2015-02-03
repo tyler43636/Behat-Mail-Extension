@@ -3,6 +3,18 @@
 - [MailCatcher](http://mailcatcher.me/)
 - [Mailtrap.io](https://mailtrap.io/)
 
+## Installation
+Require `tpayne/behat-mail-extension` using composer
+```
+composer require tpayne/behat-mail-extension --dev
+```
+or add it manually to the require-dev section of your `composer.json` file.
+```
+"require-dev": {
+  	"tpayne/behat-mail-extension": "~1.0"
+},
+```
+
 ## Configure your context
 Setup your feature context to use the Behat Mail Extension
 

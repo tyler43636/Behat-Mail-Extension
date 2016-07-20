@@ -6,7 +6,8 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Message\ResponseInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\StreamInterface;
 
 class MailTrapSpec extends ObjectBehavior
 {
@@ -20,18 +21,20 @@ class MailTrapSpec extends ObjectBehavior
         $this->shouldHaveType('tPayne\BehatMailExtension\Driver\MailTrap');
     }
 
-    public function it_gets_all_messages_from_mailtrap_format(Client $client, ResponseInterface $response)
+    public function it_gets_all_messages_from_mailtrap_format(Client $client, ResponseInterface $response, StreamInterface $stream)
     {
-        $response->json()->shouldBeCalled()->willReturn($this->getMailTrapStub());
+        $stream->getContents()->shouldBeCalled()->willReturn($this->getMailTrapStub());
+        $response->getBody()->shouldBeCalled()->willReturn($stream);
         $client->get('/api/v1/inboxes/12345/messages')->shouldBeCalled()->willReturn($response);
 
         $this->getMessages()->shouldBeArray();
         $this->getMessages()->shouldHaveCount(2);
     }
 
-    public function it_gets_the_latest_message_from_mailtrap_format(Client $client, ResponseInterface $response)
+    public function it_gets_the_latest_message_from_mailtrap_format(Client $client, ResponseInterface $response, StreamInterface $stream)
     {
-        $response->json()->willReturn($this->getMailTrapStub());
+        $stream->getContents()->shouldBeCalled()->willReturn($this->getMailTrapStub());
+        $response->getBody()->shouldBeCalled()->willReturn($stream);
         $client->get('/api/v1/inboxes/12345/messages')->willReturn($response);
 
         $this->getLatestMessage()->shouldReturnAnInstanceOf('tPayne\BehatMailExtension\Message');
@@ -46,25 +49,27 @@ class MailTrapSpec extends ObjectBehavior
 
     private function getMailTrapStub()
     {
-        return [
+        return json_encode(
             [
-                'id' => 1,
-                'subject' => 'Welcome!',
-                'sent_at' => '2015-01-28T21:28:56.000Z',
-                'from_email' => 'test@example.com',
-                'to_email' => 'joe@example.com',
-                'html_body' => "<html><body><h1>Welcome to the App!</h1><p>Thanks Joe</p></body></html>",
-                'text_body' => 'Welcome to the App! Thanks Joe'
-            ],
-            [
-                'id' => 2,
-                'subject' => 'Password Reset',
-                'sent_at' => '2015-01-28T21:28:56.000Z',
-                'from_email' => 'test@example.com',
-                'to_email' => 'joe@example.com',
-                'html_body' => "<html><body><h1>Reset your password</h1></body></html>",
-                'text_body' => 'Reset your password'
+                [
+                    'id' => 1,
+                    'subject' => 'Welcome!',
+                    'sent_at' => '2015-01-28T21:28:56.000Z',
+                    'from_email' => 'test@example.com',
+                    'to_email' => 'joe@example.com',
+                    'html_body' => "<html><body><h1>Welcome to the App!</h1><p>Thanks Joe</p></body></html>",
+                    'text_body' => 'Welcome to the App! Thanks Joe'
+                ],
+                [
+                    'id' => 2,
+                    'subject' => 'Password Reset',
+                    'sent_at' => '2015-01-28T21:28:56.000Z',
+                    'from_email' => 'test@example.com',
+                    'to_email' => 'joe@example.com',
+                    'html_body' => "<html><body><h1>Reset your password</h1></body></html>",
+                    'text_body' => 'Reset your password'
+                ]
             ]
-        ];
+        );
     }
 }

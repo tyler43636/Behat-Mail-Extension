@@ -40,8 +40,8 @@ class MailTrap implements Mail
      */
     public function getMessages()
     {
-        $messageData = $this->client->get($this->getMessagesUrl())
-            ->json();
+        $body        = $this->client->get($this->getMessagesUrl())->getBody()->getContents();
+        $messageData = json_decode($body, true);
 
         $messages = [];
 

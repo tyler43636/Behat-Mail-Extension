@@ -24,7 +24,8 @@ class MailCatcher implements Mail
      */
     public function getMessages()
     {
-        $messageData = $this->client->get('/messages')->json();
+        $body        = $this->client->get('/messages')->getBody()->getContents();
+        $messageData = json_decode($body, true);
 
         $messages = [];
 
@@ -42,7 +43,9 @@ class MailCatcher implements Mail
      */
     public function getLatestMessage()
     {
-        $messageData = $this->client->get('/messages')->json()[0];
+        $body        = $this->client->get('/messages')->getBody();
+        $data        = json_decode($body->getContents(), true);
+        $messageData = $data[0];
 
         return $this->mapToMessage($messageData);
     }

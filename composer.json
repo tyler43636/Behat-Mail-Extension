@@ -2,7 +2,7 @@
     "name": "tpayne/behat-mail-extension",
     "description": "An extension for testing emails with Behat",
     "require": {
-        "guzzlehttp/guzzle": "~5.1",
+        "guzzlehttp/guzzle": "^6.2",
         "behat/behat": "~3.0",
         "php": ">=5.4"
     },

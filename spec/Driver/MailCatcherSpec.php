@@ -7,7 +7,7 @@ use Prophecy\Argument;
 
 use GuzzleHttp\Client;
 use Psr\Http\Message\ResponseInterface;
-use GuzzleHttp\Stream\StreamInterface;
+use Psr\Http\Message\StreamInterface;
 
 class MailCatcherSpec extends ObjectBehavior
 {

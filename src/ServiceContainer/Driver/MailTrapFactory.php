@@ -19,10 +19,10 @@ class MailTrapFactory
     {
         if (isset($config['api_key']) && isset($config['mailbox_id'])) {
             $client = new Client([
-                'base_url' => 'https://mailtrap.io',
-                'defaults' => [
-                    'headers' => ['Api-Token' => $config['api_key']]
-                ]
+                'base_uri' => 'https://mailtrap.io',
+                'headers' => [
+                    'Api-Token' => $config['api_key'],
+                ],
             ]);
 
             return new MailTrap($client, $config['mailbox_id']);

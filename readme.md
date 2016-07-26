@@ -1,4 +1,8 @@
 # Behat Mail Extension
+
+## Requirements
+- PHP 5.5 or newer
+
 ## Supported Drivers
 - [MailCatcher](http://mailcatcher.me/)
 - [Mailtrap.io](https://mailtrap.io/)

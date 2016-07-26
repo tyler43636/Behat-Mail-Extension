@@ -1,5 +1,7 @@
 # Behat Mail Extension
 
+[![Build Status](https://travis-ci.org/tyler43636/Behat-Mail-Extension.svg?branch=master)](https://travis-ci.org/tyler43636/Behat-Mail-Extension)
+
 ## Requirements
 - PHP 5.5 or newer
 

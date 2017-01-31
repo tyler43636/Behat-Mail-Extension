@@ -15,9 +15,9 @@ class MailCatcherFactory implements MailFactory
      */
     public function buildDriver(array $config)
     {
-        $url = $this->buildUrl($config['base_url'], $config['http_port']);
+        $url = $this->buildUrl($config['base_uri'], $config['http_port']);
 
-        $client = new Client(['base_url' => $url]);
+        $client = new Client(['base_uri' => $url]);
 
         return new MailCatcher($client);
     }

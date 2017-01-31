@@ -62,7 +62,7 @@ class MailExtension implements Extension
                 ->scalarNode('driver')
                     ->defaultValue('mailcatcher')
                     ->end()
-                ->scalarNode('base_url')
+                ->scalarNode('base_uri')
                     ->defaultValue('localhost')
                     ->end()
                 ->scalarNode('http_port')

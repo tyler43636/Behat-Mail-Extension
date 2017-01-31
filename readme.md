@@ -44,7 +44,7 @@ Chose one of the following configurations for your `behat.yml` file.
 If no drivers are specified the following defaults will be used:
 
 - `driver`: **mailcatcher** 
-- `base_url`: **localhost**
+- `base_uri`: **localhost**
 - `http_port`: **1080**
 
 ```
@@ -61,7 +61,7 @@ default:
     extensions:
         tPayne\BehatMailExtension\ServiceContainer\MailExtension:
             driver: mailcatcher
-            base_url: localhost # optional
+            base_uri: localhost # optional
             http_port: 1080 # optional
 ```
 ### Mailtrap.io

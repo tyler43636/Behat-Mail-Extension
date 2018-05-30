@@ -66,13 +66,23 @@ class MailCatcher implements Mail
      */
     private function mapToMessage($message)
     {
-        $html = $this->client->get("/messages/{$message['id']}.html")
-            ->getBody()
-            ->getContents();
+        try {
+            $html = $this->client->get("/messages/{$message['id']}.html")
+                ->getBody()
+                ->getContents();
+        }
+        catch (\Exception $exception) {
+            $html = sprintf('Error while retrieving HTML message "%s": %s', $message['id'], $exception->getMessage());
+        }
 
-        $text = $this->client->get("/messages/{$message['id']}.plain")
-            ->getBody()
-            ->getContents();
+        try {
+            $text = $this->client->get("/messages/{$message['id']}.plain")
+                ->getBody()
+                ->getContents();
+        }
+        catch (\Exception $exception) {
+            $text = sprintf('Error while retrieving Plain message "%s": %s', $message['id'], $exception->getMessage());
+        }
 
         return MessageFactory::fromMailCatcher($message, $html, $text);
     }
